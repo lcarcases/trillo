@@ -1,0 +1,651 @@
+/*
+  Declare all variables
+*/
+:root {
+  --color-primary:  #eb2f64;
+  --color-primary-light: #FF3366;
+  --color-primary-dark: #BA265D;
+  --color-grey-light-1: #faf9f9;
+  --color-grey-light-2: #f4f2f2;
+  --color-grey-light-3: #f0eeee;
+  --color-grey-light-4: #ccc;
+  --color-grey-dark-1: #333;
+  --color-grey-dark-2: #777;
+  --color-grey-dark-3: #999;
+  /* The variables not only store colors, it can save othercomplex values
+      like this one for shadow */
+  --shadow-dark: 0 2rem 6rem rgba(0,0,0,.3);
+  --shadow-light: 0 2rem 5rem rgba(0,0,0,.06);
+  --line: 1px solid var(--color-grey-light-2); }
+
+* {
+  margin: 0;
+  padding: 0; }
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit; }
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%; }
+  @media only screen and (max-width: 68.75em) {
+    html {
+      font-size: 50%; } }
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--color-grey-dark-2);
+  background-image: linear-gradient(to right bottom, var(--color-primary-light), var(--color-primary-dark));
+  background-size: cover;
+  /*This because it was seen several lines of gradient and dont want that behavior*/
+  background-repeat: no-repeat;
+  /*
+      Set body size equal to view port height, because otherwise background dont ocuppy all
+      background 
+    */
+  min-height: 100vh; }
+
+.container {
+  /* Select a max-width enough big that fit all width of viewport */
+  max-width: 120rem;
+  margin: 8rem auto;
+  background-color: var(--color-grey-light-1);
+  box-shadow: var(--shadow-dark);
+  min-height: 50rem; }
+  @media only screen and (max-width: 75em) {
+    .container {
+      margin: 0;
+      max-width: 100%;
+      width: 100%; } }
+
+.header {
+  font-size: 1.4rem;
+  height: 7rem;
+  background-color: #fff;
+  border-bottom: var(--line);
+  /*Put all elements one aside another */
+  display: flex;
+  /* align elements one at the begining, one at the middle and last one to the last */
+  justify-content: space-between;
+  /* Center elements vertically*/
+  align-items: center; }
+  @media only screen and (max-width: 31.25em) {
+    .header {
+      /* Move the search textbox  to a second line */
+      flex-wrap: wrap;
+      height: 11rem;
+      /* Center elements vertically leaving an space between them */
+      align-content: space-around; } }
+
+.content {
+  /* Initialize flex-box in the content element*/
+  display: flex; }
+  @media only screen and (max-width: 56.25em) {
+    .content {
+      /* This set the lateral menu above description section */
+      flex-direction: column; } }
+
+.sidebar {
+  background-color: var(--color-grey-dark-1);
+  /* 
+        flex: grow | shrink | basis. In this case we dont want sidebar grow if there is any space
+        neither shrink if there is not enough space, instead, we want its width (basis) be of 18% 
+     */
+  flex: 0 0 18%;
+  display: flex;
+  /* Changes the main axis from horizontally direction to vertically one*/
+  flex-direction: column;
+  /* Now align vertically because flex-direction was set to column */
+  justify-content: space-between; }
+
+.hotel-view {
+  background-color: orangered;
+  /* 
+      Here grow is equal 1 that make the element occupy all the available space. 
+      In this case 100% - 18% of sidebar that is equal to 82%
+    */
+  flex: 1; }
+
+/* Represent all detail area */
+.detail {
+  font-size: 1.4rem;
+  display: flex;
+  padding: 4.5rem;
+  background-color: var(--color-grey-light-1);
+  border-bottom: var(--line); }
+  @media only screen and (max-width: 56.25em) {
+    .detail {
+      /* Decrease outdoor white space in detail section */
+      padding: 3rem; } }
+  @media only screen and (max-width: 37.5em) {
+    .detail {
+      /* Set description and reviews text one above another one */
+      flex-direction: column; } }
+
+.description {
+  background-color: #fff;
+  box-shadow: var(--shadow-light);
+  /* grow | shrink | basis. Use 60% of space */
+  flex: 0 0 60%;
+  padding: 3rem;
+  margin-right: 4.5rem; }
+  @media only screen and (max-width: 56.25em) {
+    .description {
+      /* Decrease outdoor white space in description section */
+      padding: 2rem;
+      margin-right: 3rem; } }
+  @media only screen and (max-width: 37.5em) {
+    .description {
+      margin-right: 0;
+      margin-bottom: 3rem; } }
+
+.user-reviews {
+  /* Use the rest of space, in this case 100 -60% = 40%*/
+  flex: 1;
+  /* This to center button show all in the comments area*/
+  display: flex;
+  flex-direction: column;
+  /* With this the border down button only occupy the needed space, withouth this 
+       would occupy al width of column*/
+  align-items: center; }
+
+.logo {
+  height: 3.25rem;
+  margin-left: 2rem; }
+
+.search {
+  /* I dont want to grow, neither to shrink and i want occupy 40% of header element */
+  flex: 0 0 40%;
+  /**
+     Center horizontally and vertically, elements of .search
+     **/
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+  @media only screen and (max-width: 31.25em) {
+    .search {
+      /* Move search textbox form 2nd position to last position */
+      order: 1;
+      /* Here force the search texbox to occupy all width space and becaue of 
+          that it will wrap and it is send to a second row*/
+      flex: 0 0 100%;
+      /* Give the feeling search textbox occupy all width space */
+      background-color: var(--color-grey-light-2); } }
+  .search__input {
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    background-color: var(--color-grey-light-2);
+    border: none;
+    padding: .7rem 2rem;
+    border-radius: 100px;
+    /*Occupy the 90% of width of .search element*/
+    width: 90%;
+    transition: all .2s;
+    /* This make the search box cover the search button and look like the button 
+           search is inside the search textbox*/
+    margin-right: -3.25rem; }
+    .search__input:focus {
+      outline: none;
+      /* Increase the width from 90% to 100% to make the expand effect*/
+      width: 100%;
+      /* Change color slightly */
+      background-color: var(--color-grey-light-3); }
+    .search__input::-webkit-input-placeholder {
+      font-weight: 100;
+      color: var(--color-grey-light-4); }
+  .search__input:focus + .search__button {
+    background-color: var(--color-grey-light-3); }
+  .search__button {
+    border: none;
+    /*Set the same color as search text box and seem the same element*/
+    background-color: var(--color-grey-light-2); }
+    .search__button:focus {
+      outline: none; }
+    .search__button:active {
+      /* Move slightly down the search button */
+      transform: translateY(2px); }
+  .search__icon {
+    height: 2rem;
+    width: 2rem;
+    /* Change background color of the magnifying glass */
+    fill: var(--color-grey-dark-3); }
+
+.user-nav {
+  display: flex;
+  /* Center vertically the notifications elements */
+  align-items: center;
+  /* Make notification height be the same as header height */
+  align-self: stretch;
+  /* Select all direct children of .user_nav element, in this case, notifications items*/ }
+  .user-nav > * {
+    padding: 0 2rem;
+    cursor: pointer;
+    /* Notifications elments occupy al height of its parent */
+    height: 100%;
+    display: flex;
+    /* Center vertically the notificartions element */
+    align-items: center; }
+  .user-nav > *:hover {
+    background-color: var(--color-grey-light-2); }
+  .user-nav__icon-box {
+    position: relative; }
+  .user-nav__icon {
+    height: 2.5rem;
+    width: 2.25rem;
+    fill: var(--color-grey-dark-2); }
+  .user-nav__notification {
+    font-size: .8rem;
+    height: 1.75rem;
+    width: 1.75rem;
+    border-radius: 50%;
+    background-color: var(--color-primary);
+    color: #fff;
+    position: absolute;
+    top: 1.5rem;
+    right: 1.1rem;
+    /*Center number of notificatins inside de red circle*/
+    display: flex;
+    /* Center horizontally*/
+    justify-content: center;
+    /* Center vertically */
+    align-items: center; }
+  .user-nav__user-photo {
+    height: 3.75rem;
+    border-radius: 50%;
+    margin-right: 1rem; }
+
+.side-nav {
+  font-size: 1.4rem;
+  /* Remove the left point of ul list */
+  list-style: none;
+  margin-top: 3.5rem;
+  /* This is the on over efect element */
+  /* Item get active on hover event and then change slightly the color*/ }
+  @media only screen and (max-width: 56.25em) {
+    .side-nav {
+      /* Set menu option side  by side */
+      display: flex;
+      margin: 0; } }
+  .side-nav__item {
+    position: relative; }
+    .side-nav__item:not(:last-child) {
+      margin-bottom: .5rem; }
+      @media only screen and (max-width: 56.25em) {
+        .side-nav__item:not(:last-child) {
+          margin: 0; } }
+    @media only screen and (max-width: 56.25em) {
+      .side-nav__item {
+        /* This make option menu elements grow proportionally then all of them
+            occupy same space along width of menu bar*/
+        flex: 1; } }
+  .side-nav__item::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 3px;
+    background-color: var(--color-primary);
+    /* Inittially Y value is 0*/
+    transform: scaleY(0);
+    /* Transforms initiate the animation with scaleY, then after .2s of delay,
+           begin the width animation that take .4s */
+    transition: transform 0.2s, width 0.4s cubic-bezier(1, 0, 0, 1) 0.2s, background-color 0.1s; }
+  .side-nav__item:hover::before, .side-nav__item--active::before {
+    /* Final values of on over animation on side menu*/
+    transform: scaleY(1);
+    width: 100%; }
+  .side-nav__item:active::before {
+    background-color: var(--color-primary-light); }
+  .side-nav__link:link, .side-nav__link:visited {
+    color: var(--color-grey-light-1);
+    /* Remove la linea inferior de cada link */
+    text-decoration: none;
+    display: block;
+    padding: 1.5rem 3rem;
+    /* In this case set position only to z-index property work properly */
+    position: relative;
+    /* This for text and icon appear over the red effect on hover animation*/
+    z-index: 10;
+    /* Center vertically icons and text in the menu*/
+    display: flex;
+    align-items: center; }
+    @media only screen and (max-width: 56.25em) {
+      .side-nav__link:link, .side-nav__link:visited {
+        justify-content: center;
+        padding: 2rem; } }
+    @media only screen and (max-width: 37.5em) {
+      .side-nav__link:link, .side-nav__link:visited {
+        /* Set icon above text item menu */
+        flex-direction: column;
+        padding: 1.5rem .5rem; } }
+  .side-nav__icon {
+    width: 1.75rem;
+    height: 1.75rem;
+    margin-right: 2rem;
+    /* currentColor is an included variable of css that refer to parent color. It is not
+           a user defined variable. Always get the color of its parents even when parent
+           change color on execution, this one will be too */
+    fill: currentColor; }
+    @media only screen and (max-width: 37.5em) {
+      .side-nav__icon {
+        /* Center icon with text and set and space between them */
+        margin: 0;
+        width: 1.5rem;
+        height: 1.5rem;
+        margin-bottom: .7rem; } }
+
+.legal {
+  font-size: 1.2rem;
+  color: var(--color-grey-light-4);
+  text-align: center;
+  padding: 2.5rem; }
+  @media only screen and (max-width: 56.25em) {
+    .legal {
+      display: none; } }
+
+.gallery {
+  /* Set images gallery one beside another one*/
+  display: flex; }
+  .gallery__photo {
+    /* Fluid image for responsive design */
+    width: 100%;
+    /* this to remove white space at the bottom*/
+    display: block; }
+
+.overview {
+  border-bottom: var(--line);
+  /* Set all elements side by side */
+  display: flex;
+  /* Align vertically */
+  align-items: center;
+  /* Location section styles */
+  /* Rating section styles */ }
+  .overview__heading {
+    font-size: 2.25rem;
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 1.5rem 3rem; }
+    @media only screen and (max-width: 37.5em) {
+      .overview__heading {
+        /* Decrease  heading text */
+        font-size: 1.8rem;
+        padding: 1.25rem 2rem; } }
+  .overview__stars {
+    /* This is a trick for set an space between 2nd and 3th element 
+          but with the start using only the space it occupy, i would
+          get the same with flex: 1 but stars background would ocuppy all 
+          white space */
+    margin-right: auto;
+    /*This beacuse start was not perfectlly aligned , it had an white space at the bottom
+         that dont let it them to be aligned with left text */
+    display: flex; }
+  .overview__icon-star, .overview__icon-location {
+    width: 1.75rem;
+    height: 1.75rem;
+    fill: var(--color-primary); }
+  .overview__location {
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center; }
+  .overview__icon-location {
+    margin-right: .5rem; }
+  .overview__rating {
+    background-color: var(--color-primary);
+    color: #fff;
+    margin-left: 3rem;
+    padding: 0 2.25rem;
+    /* This is the element occupy all height of its parent */
+    align-self: stretch;
+    /* If i dont set this property, ratings text set side by side and not one above the other*/
+    flex-direction: column;
+    /* Center ratings text elements horizontally and vertically */
+    display: flex;
+    /* Center vertically */
+    align-items: center;
+    /* Center horizontally */
+    justify-content: center; }
+    @media only screen and (max-width: 37.5em) {
+      .overview__rating {
+        padding: 0 1.5rem; } }
+  .overview__rating-average {
+    font-size: 2.25rem;
+    font-weight: 300;
+    /* Decrease the space between rating text elements */
+    margin-bottom: -.3rem; }
+    @media only screen and (max-width: 37.5em) {
+      .overview__rating-average {
+        font-size: 1.8rem; } }
+  .overview__rating-count {
+    font-size: .8rem;
+    text-transform: uppercase; }
+    @media only screen and (max-width: 37.5em) {
+      .overview__rating-count {
+        font-size: .5rem; } }
+
+/* Button style for look like a link*/
+.btn-inline {
+  border: none;
+  color: var(--color-primary);
+  font-size: inherit;
+  /* Current color here refer to color property of .btn-inline element */
+  border-bottom: 1px solid currentColor;
+  padding-bottom: .2rem;
+  display: inline-block;
+  background-color: transparent;
+  cursor: pointer;
+  transition: all .2s;
+  /* Arrow button animation*/
+  /* Infinitive effect animation while button has the focus */ }
+  .btn-inline span {
+    margin-left: 3px;
+    transition: margin-left .2s; }
+  .btn-inline:hover {
+    color: var(--color-grey-dark-1);
+    /* Arrow button animation */ }
+    .btn-inline:hover span {
+      margin-left: 8px; }
+  .btn-inline:focus {
+    /* Remove default blue border */
+    outline: none;
+    /* Make once the button is clicked having the focus, execute pulsate animation
+           in an infinite way, once and once again */
+    animation: pulsate 1s infinite; }
+
+@keyframes pulsate {
+  /* Initial state is default property */
+  0% {
+    transform: scale(1);
+    box-shadow: none; }
+  /* At middle state scale to 1.05 and set a box-shadow*/
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 1rem 4rem rgba(0, 0, 0, 0.25); }
+  100% {
+    /* At the end of animation set values to normal state */
+    transform: scale(1);
+    box-shadow: none; } }
+
+/* In this case i dont set last-child, instead i set last-of-type to refer
+   to the last <p> element */
+.paragraph:not(:last-of-type) {
+  margin-bottom: 2rem; }
+
+.list {
+  /* Delete points from left side*/
+  list-style: none;
+  margin: 3rem 0;
+  padding: 3rem 0;
+  /* Draw a line above and another below */
+  border-top: var(--line);
+  border-bottom: var(--line);
+  display: flex;
+  /* Set items side by side and by lines */
+  flex-wrap: wrap;
+  /* This is the arrow icon in the left side of each item list */ }
+  .list__item {
+    /* This set the width of items list to a 50% width and put list items
+            in two columns */
+    flex: 0 0 50%;
+    margin-bottom: .7rem; }
+  .list__item::before {
+    /* Dimentios of arrow */
+    content: "";
+    display: inline-block;
+    height: 1rem;
+    width: 1rem;
+    margin-right: .7rem;
+    background-image: url(../img/chevron-thin-right.svg);
+    background-size: cover;
+    /* Set the arrow icon image like a mask, then, only the background part 
+           cover it by the arrow will be visible. Also check for
+           browser property support */ }
+    @supports (-webkit-mask-image: url()) or (mask-image: url()) {
+      .list__item::before {
+        background-color: var(--color-primary);
+        -webkit-mask-image: url(../img/chevron-thin-right.svg);
+        -webkit-mask-size: cover;
+        /* This when all browser implemented this new feture */
+        mask-image: url(../img/chevron-thin-right.svg);
+        mask-size: cover;
+        /* This to anulate background image above */
+        background-image: none; } }
+
+.recommend {
+  font-size: 1.3rem;
+  color: var(--color-grey-dark-3);
+  display: flex;
+  align-items: center; }
+  .recommend__count {
+    margin-right: auto; }
+  .recommend__friends {
+    display: flex; }
+  .recommend__photo {
+    box-sizing: content-box;
+    height: 4rem;
+    width: 4rem;
+    border-radius: 50%;
+    border: 3px solid #fff; }
+    .recommend__photo:not(:last-child) {
+      /* Overlap slightly the images */
+      margin-right: -2rem; }
+
+.review {
+  background-color: #fff;
+  box-shadow: var(--shadow-light);
+  padding: 3rem;
+  margin-bottom: 3.5rem;
+  position: relative;
+  /*This for the part of Quote element that overflow be hidden*/
+  overflow: hidden;
+  /* Set the Quote symbol in the commment section. For see especial symbols in css look
+       for css-tricks.com/snippets/html/glyphs */ }
+  @media only screen and (max-width: 56.25em) {
+    .review {
+      /* Decrease outdoor white space in description section */
+      padding: 2rem;
+      margin-bottom: 3rem; } }
+  .review__text {
+    margin-bottom: 2rem;
+    /* Here postion is set to z-index work properly*/
+    position: relative;
+    /*Set text on top of the Quote element */
+    z-index: 10; }
+  .review__user {
+    display: flex;
+    align-items: center; }
+  .review__photo {
+    height: 4.5rem;
+    width: 4.5rem;
+    border-radius: 50%;
+    margin-right: 1.5rem; }
+  .review__user-box {
+    /* This push the user rating to the right */
+    margin-right: auto; }
+  .review__user-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: .4rem; }
+  .review__user-date {
+    font-size: 1rem;
+    color: var(--color-grey-dark-3); }
+  .review__rating {
+    color: var(--color-primary);
+    font-size: 2.2rem;
+    font-weight: 300; }
+  .review::before {
+    content: "\201C";
+    position: absolute;
+    top: -2.75rem;
+    left: -1rem;
+    /* This decrease the height of Quote*/
+    line-height: 1;
+    font-size: 20rem;
+    color: var(--color-grey-light-2);
+    font-family: sans-serif;
+    /* Put the Quote below the text, then text it is not affected for the position
+           of Quote symbol */
+    z-index: 1; }
+
+.cta {
+  /* Centering call to action at the bottom of the page */
+  padding: 3.5rem 0;
+  text-align: center;
+  /* Text call to action*/ }
+  @media only screen and (max-width: 56.25em) {
+    .cta {
+      /* Decrease outdoor white space in cta section */
+      padding: 2.5rem 0; } }
+  .cta__book-now {
+    font-size: 2rem;
+    font-weight: 300;
+    text-transform: uppercase;
+    margin-bottom: 2.5rem; }
+
+.btn {
+  font-size: 1.5rem;
+  font-weight: 300;
+  text-transform: uppercase;
+  border-radius: 100px;
+  border: none;
+  /* Gradient background */
+  background-image: linear-gradient(to right, var(--color-primary-light), var(--color-primary-dark));
+  color: #fff;
+  position: relative;
+  /* This to hide invisible text that it is positioned above button */
+  overflow: hidden;
+  cursor: pointer;
+  /* Positioning invisible text */
+  /* Change direction of background gradient on hover event*/
+  /* Make the button pulsate like a heart when has focus*/ }
+  .btn > * {
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    transition: all .2s; }
+  .btn__visible {
+    padding: 2rem 7.5rem; }
+  .btn__invisible {
+    position: absolute;
+    padding: 2rem 0;
+    left: 0;
+    /* 100% here refers to the height of parent and put the text outside */
+    top: -100%; }
+  .btn:hover {
+    background-image: linear-gradient(to left, var(--color-primary-light), var(--color-primary-dark)); }
+  .btn:hover .btn__visible {
+    /* We use traslate and not top, because, we dont set position property */
+    transform: translateY(100%); }
+  .btn:hover .btn__invisible {
+    /* Put down the invisible text  */
+    top: 0; }
+  .btn:focus {
+    outline: none;
+    animation: pulsate 1s infinite; }

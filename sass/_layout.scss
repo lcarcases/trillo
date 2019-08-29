@@ -1,0 +1,132 @@
+.container {
+     /* Select a max-width enough big that fit all width of viewport */
+     max-width: 120rem;
+     margin: 8rem auto;
+     background-color: var(--color-grey-light-1);
+     box-shadow: var(--shadow-dark);
+     min-height: 50rem;
+
+     @media only screen and (max-width: $bp-largest) {
+          // Remove background pink color of site
+          margin:0;
+          max-width: 100%;
+          width: 100%;
+     }
+}
+
+.header {
+     font-size:1.4rem;
+     height: 7rem;
+     background-color: #fff;
+     border-bottom: var(--line);
+
+     /*Put all elements one aside another */
+     display: flex;
+     /* align elements one at the begining, one at the middle and last one to the last */
+     justify-content: space-between; 
+     /* Center elements vertically*/
+     align-items: center;
+
+     @media only screen and (max-width: $bp-smallest) {
+         /* Move the search textbox  to a second line */
+         flex-wrap: wrap;
+         height: 11rem;
+         /* Center elements vertically leaving an space between them */
+         align-content: space-around;
+     }
+}
+
+.content {
+     /* Initialize flex-box in the content element*/
+     display: flex;
+
+     @media only screen and (max-width: $bp-medium) {
+            /* This set the lateral menu above description section */
+           flex-direction: column;
+     }
+}
+
+.sidebar {
+     background-color: var(--color-grey-dark-1);
+     /* 
+        flex: grow | shrink | basis. In this case we dont want sidebar grow if there is any space
+        neither shrink if there is not enough space, instead, we want its width (basis) be of 18% 
+     */
+     flex: 0 0 18%;  
+
+     display: flex;
+     /* Changes the main axis from horizontally direction to vertically one*/
+     flex-direction: column;
+     /* Now align vertically because flex-direction was set to column */
+     justify-content: space-between;
+
+}
+
+.hotel-view {
+    //background-color: orangered;
+    /* 
+      Here grow is equal 1 that make the element occupy all the available space. 
+      In this case 100% - 18% of sidebar that is equal to 82%
+    */
+    flex: 1;
+    width: 61.43rem;
+
+    @media only screen and (max-width: $bp-medium) {
+     /* Decrease outdoor white space in detail section */
+     width: auto;
+  }
+
+
+}
+
+/* Represent all detail area */
+.detail {
+    font-size: 1.4rem;  
+    display: flex;
+    padding: 4.5rem;
+    background-color: var(--color-grey-light-1);
+    border-bottom: var(--line);
+
+    @media only screen and (max-width: $bp-medium) {
+       /* Decrease outdoor white space in detail section */
+       padding: 3rem;
+    }
+
+    @media only screen and (max-width: $bp-small) {
+      /* Set description and reviews text one above another one */   
+      flex-direction: column;
+    }
+}
+
+.description {
+    background-color: #fff;
+    box-shadow: var(--shadow-light); 
+    /* grow | shrink | basis. Use 60% of space */ 
+    flex: 0 0 60%;
+    padding: 3rem;
+    margin-right: 4.5rem;
+
+    @media only screen and (max-width: $bp-medium) {
+     /* Decrease outdoor white space in description section */
+     padding: 2rem;
+     margin-right: 3rem;
+    }
+
+    @media only screen and (max-width: $bp-small) {
+       margin-right: 0;
+       margin-bottom: 3rem;
+    }
+}
+
+.user-reviews {
+    /* Use the rest of space, in this case 100 -60% = 40%*/ 
+    flex: 1;
+
+    /* This to center button show all in the comments area*/
+    display: flex;
+    flex-direction: column;
+    /* With this the border down button only occupy the needed space, withouth this 
+       would occupy al width of column*/
+    align-items: center;
+
+}

@@ -1,0 +1,71 @@
+/*
+  Declare all variables
+*/
+:root {
+   --color-primary:  #eb2f64;
+   --color-primary-light: #FF3366;
+   --color-primary-dark: #BA265D;
+
+   --color-grey-light-1: #faf9f9;
+   --color-grey-light-2: #f4f2f2;
+   --color-grey-light-3: #f0eeee;
+   --color-grey-light-4: #ccc;
+
+   --color-grey-dark-1: #333;
+   --color-grey-dark-2: #777;
+   --color-grey-dark-3: #999;
+
+   /* The variables not only store colors, it can save othercomplex values
+      like this one for shadow */
+   --shadow-dark: 0 2rem 6rem rgba(0,0,0,.3);
+   --shadow-light: 0 2rem 5rem rgba(0,0,0,.06); 
+
+   --line: 1px solid var(--color-grey-light-2);
+
+}
+
+// SASS variables
+
+$bp-largest: 75em;  //1200px/16px = 75em
+$bp-large: 68.75em; //1100px/16px = 68.75em
+$bp-medium: 56.25em; //900px/16px = 56.25em
+$bp-small: 37.5em;   //600px/16px = 37.5em
+$bp-smallest: 31.25em;   //500px/16px = 31.25em
+$bp-superSmallest: 27.5em;     //440px/16px = 27.5em
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+
+html {
+    box-sizing: border-box; 
+    font-size: 62.5%; // 1rem = 10px, 10px/16px = 62.5%
+
+    @media only screen and (max-width: $bp-large) {
+       font-size: 50%;
+    }
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    color: var(--color-grey-dark-2);
+    background-image: linear-gradient(to right bottom, var(--color-primary-light), var(--color-primary-dark));
+    background-size: cover;
+    /*This because it was seen several lines of gradient and dont want that behavior*/
+    background-repeat: no-repeat;
+    /*
+      Set body size equal to view port height, because otherwise background dont ocuppy all
+      background 
+    */
+    min-height: 100vh;
+}
